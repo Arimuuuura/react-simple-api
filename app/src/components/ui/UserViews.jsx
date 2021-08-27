@@ -2,6 +2,14 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Users } from '../Users';
 import { User } from '../User';
+import styled from 'styled-components';
+import { BackButton } from '../BackButton';
+
+const Container = styled.div`
+  background-color: aqua;
+  margin: 0;
+  padding: 40px;
+`
 
 export const UserViews = (props) => {
 
@@ -28,15 +36,24 @@ export const UserViews = (props) => {
     setIsClicked(true);
   }
 
+  const onClickBack = () => {
+    setData([]);
+    setId('');
+    setIsClicked(false);
+  }
+
   return (
-    <>
+    <Container>
       {
         IsClicked ? (
-          <User data={data} />
+          <>
+            <User data={data} />
+            <BackButton onClick={onClickBack}>Back</BackButton>
+          </>
         ) : (
           <Users data={data} onClick={onClickKey} />
         )
       }
-    </>
+    </Container>
   )
 }
